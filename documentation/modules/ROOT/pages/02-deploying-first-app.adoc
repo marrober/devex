@@ -2,40 +2,37 @@
 
 :!sectids:
 
-image::002-image001.png[Example Topology Image]
+image::03-01-examples2i.png[Example Topology Image]
 
 == *Deploying an Application to OpenShift*
 
 ====
 *What will you learn?*
 
-This Module will introduce you to the concepts of *Applications* from the perspective of deploying them on OpenShift. 
+This module will introduce you to the concepts of *applications* from the perspective of deploying them on OpenShift. 
 
-This application already exists as a Docker Image; this Module will walk you through the steps to execute it as an Application. 
+This application already exists as a Docker Image; this module will walk you through the steps to execute it as an application. 
 
-After completing the Module you will understand the concepts of an Application and how to instantiate one with OpenShift.
+After completing the module you will understand the concepts of an application and how to instantiate one with OpenShift.
 ====
 
-=== *Pre-Requisites*
+=== Pre-Requisites
 
-In order to undertake the module you need to be logged onto the cluster and have access to a project. The project will have been created in a prior exercise. The application to which the environment variables will be added will also have been created in a prior exercise.
+In order to undertake the module you need to be logged onto the cluster and have access to a project.
 
 Ensure that the two text boxes at the top of page contain the Cluster address provided by the workshop facilitators and the project you have been assigned. Remember to press *RETURN* after entering text into each field.
 
-=== *Creating the Application*
+=== Creating the Application
 
-OpenShift provides two *perspectives* within the User Interface. The first is *Administrator*, which gives you a comprehensive overview, categorised, of the Objects and Components you have access to.
+OpenShift provides two *perspectives* within the User Interface. The first is *Administrator*, which gives you a comprehensive overview of the Objects and Components to which you have access.
 
-The second is the *Developer* viewpoint, which we will use extensively during this Module.
+The second is the *Developer* viewpoint, which we will use extensively during this module.
 
 If you haven't already logged on, log on to the Bootcamp cluster at:
 
 https://console-openshift-console.%CLUSTER_SUBDOMAIN%[role='params-link',window='_blank']
 
-[NOTE]
-====
 What we are going to do is create an Application from a pre-built image, hosted on the internal OpenShift image registry. +
-====
 
 Switch the viewpoint to Developer (Top left pulldown). 
 
@@ -44,33 +41,47 @@ Switch the viewpoint to Developer (Top left pulldown).
 The Developer viewpoint is an opinionated interface for application developers, containing all the components you need to develop and configure your applications
 ====
 
-Select *Add+*
+==== Creating your project
 
-From the options provided, click on *Container Images.*
+Select the 'Topology' view on the left hand side of the screen and you will be shown a screen similar to that which is shown below. This indicates that you currently do not have any projects. You need to create a new project specifically for you to isolate your work from other people attending the workshop.
 
-You will be provided with a wizard template for creating an Application from an existing Image. In order to do this we need to have an existing prebuilt Docker image, which is available at:
+image::02-01-no-projects.png[Topology view with no projects]
+
+Click on the blue hyperlink 'Create a new project' within the blue box with the title "Getting Started". Create a new project with the name :
 
 [.console-input]
 [source,bash]
 ----
-to be defined
+%PROJECT%
 ----
 
-*TODO* change instruction to use internal registry
+You can leave the 'Display name' and description empty or add something descriptive if you wish.
 
-Copy the contents of the field above and paste them into the text area beneath *Image name from external registry* which should be selected by default (if it is not, select this option before pasting the target image location in.
+==== Creating the application
+
+Once the project has been created select Add+ from the left hand side menu.
+
+From the options provided, click on *Container Images.*
+
+You will be provided with a wizard template for creating an Application from an existing contaier image. In order to do this we need to have an existing prebuilt image, which is available at:
+
+[.console-input]
+[source,bash]
+----
+quay.io/marrober/bootcamp-app:1
+----
+
+Copy the contents of the field above and paste it into the text area beneath *Image name from external registry* which should be selected by default (if it is not, select this option before pasting the target image location in).
 
 [NOTE]
 ====
-When we complete this form the image from that repository will be used to construct an Application Container. +
-You can create applications directly from any Image that you can see within the OpenShift integrated registry. OpenShift has its own registry internally from which all applications are served; even
-when pulling an application from an external registry it will be pulled into the integrated registry first, making the integrated registry a source of truth for the entire cluster
+When we complete this form the image from that repository will be used to construct an application pod container the selected container image.
+You can create applications directly from any image that you can see within an accessible registry. OpenShift has its own registry internally from which images will be served; even when pulling a container from an external registry it will be pulled into the integrated registry first, making the integrated registry a source of truth for the entire cluster.
 ====
-*TODO* change for internal image
 
-Once you have entered the field contents you should get a message saying *Validated* displayed beneath the textbox; this indicates that the Image exists at the target point.
+Once you have entered the container image URL you should get a message saying *Validated* displayed beneath the textbox; this indicates that the Image exists at the target location and OpenShift is able to access it. Some image registries require a user authentication process before images can be pulled. 
 
-*optional -*Feel free to choose a Runtime Icon for the application from the pulldown; this will be displayed on the topology when the Application is created. It defaults to an OpenShift logo.
+*Optional* - Feel free to choose a Runtime Icon for the application from the pulldown; this will be displayed on the topology when the Application is created. It defaults to an OpenShift logo.
 
 [NOTE]
 ====
@@ -125,7 +136,7 @@ Put simply the 'oc' command gives you create, read, update and delete access to 
 
 === *Further Exercises*
 
-These are completely optional but give you a chance to explore the concepts of the Module.
+These are completely optional but give you a chance to explore the concepts of the module.
 
 *Using 'oc' create another copy of the Application with a different name*
 
